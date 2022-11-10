@@ -28,7 +28,7 @@ export function OnOff(props: OnOffPropsType) {
     const lightStyle = {
         width: "20px",
         height: "20px",
-        borderRadius: "10px",
+        borderRadius: "50%",
         border: "1px solid black",
         display: "inline-block",
         margin: "5px",

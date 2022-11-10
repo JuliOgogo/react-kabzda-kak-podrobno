@@ -39,12 +39,10 @@ export function OnOff(props: OnOffPropsType) {
         <div>
             <div style={onStyle} onClick={() => {
                 props.onClick(true)
-            }}>On
-            </div>
+            }}>On</div>
             <div style={offStyle} onClick={() => {
                 props.onClick(false)
-            }}>Off
-            </div>
+            }}>Off</div>
             <div style={lightStyle}>L</div>
         </div>
     )

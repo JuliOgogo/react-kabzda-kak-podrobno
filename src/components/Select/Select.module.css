@@ -1,21 +1,36 @@
 .select {
+    font-family: sans-serif;
 }
 
 .options {
-    border: 2px solid black;
+    border: 1px solid black;
+    border-radius: 2px;
     position: absolute;
-    padding: 10px;
+    min-width: 100px;
+    min-height: 20px;
 }
 
 .option {
     cursor: pointer;
-    margin-bottom: 5px;
+    padding: 10px;
+    border-bottom: 1px solid black;
 }
 
 .selectedOpt {
-    border: 2px solid black;
+    border: 1px solid black;
+    border-radius: 2px;
     display: inline-block;
-    min-width: 50px;
+    min-width: 80px;
     min-height: 20px;
-    color: olive;
+    padding: 10px;
+}
+
+.selected {
+    background: deepskyblue;
+    color: white;
+}
+
+.option:hover {
+    background: steelblue;
+    color: white;
 }

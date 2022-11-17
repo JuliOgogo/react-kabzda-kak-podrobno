@@ -14,9 +14,11 @@ type SelectPropsType = {
 
 export function Select(props: SelectPropsType) {
 
-    const selectedElement = props.options.find(el => el.value == props.value)
-
     const [mode, setMode] = useState(false)
+    const [hoveredOptValue, setHoveredOptValue] = useState(props.value)
+
+    const selectedOption = props.options.find(opt => opt.value === props.value)
+    const hoveredOption = props.options.find(opt => opt.value === hoveredOptValue)
 
     const changeModeOnClickHandler = () => {
         setMode(!mode)
@@ -26,22 +28,35 @@ export function Select(props: SelectPropsType) {
         setMode(!mode)
     }
 
+    const onKeyUp = () => {
+        console.log('press')
+        /*for (let i = 0; i < props.options.length; i++) {
+            if (props.options[i].value === hoveredOptValue) {
+                setHoveredOptValue(props.options[i + 1].value)
+                break
+            }
+        }*/
+    }
+
     return (
         <div>
 
-            <select value={'3'}>
+            {/*<select value={'3'}>
                 <option value="1">Julia</option>
                 <option value="2">Max</option>
                 <option value="3">Kate</option>
-            </select>
+            </select>*/}
 
-            <div className={s.select}>
-                <span className={s.selectedOpt} onClick={changeModeOnClickHandler}>{selectedElement?.title}</span>
+            <div className={s.select} onKeyUp={onKeyUp} /*tabIndex={0}*/>
+                <span className={s.selectedOpt} onClick={changeModeOnClickHandler}>{selectedOption?.title}</span>
                 {
                     mode &&
                     <div className={s.options}>
                         {props.options.map(opt => <div key={opt.value}
-                                                       className={s.option}
+                                                       className={s.option + ' ' + (hoveredOption === opt ? s.selected : '')}
+                                                       onMouseEnter={() => {
+                                                           setHoveredOptValue(opt.value)
+                                                       }}
                                                        onClick={() => optionOnClickHandler(opt.value)}>{opt.title}</div>)}
                     </div>
                 }

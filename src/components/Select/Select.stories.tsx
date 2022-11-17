@@ -1,34 +1,30 @@
 import React, {useState} from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {action} from "@storybook/addon-actions";
-import {ItemType, Select} from "./Select";
+import {ComponentMeta} from '@storybook/react';
+import {OptionType, Select} from "./Select";
 
-const itemsCreator = (names: string[]): ItemType[] => {
+const itemsCreator = (names: string[]): OptionType[] => {
     return names.map(e => ({title: e, value: e}))
 }
 
 export default {
     title: 'Select stories',
-    component: Select,
-    args: {
-        value: '--Title--',
-        items: itemsCreator(['a', 'b', 'c', 'd']),
-        onChange: action('onChange clicked'),
-    }
+    component: Select
 } as ComponentMeta<typeof Select>;
 
-const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />;
+export const WithValue = () => {
 
-export const Select1 = Template.bind({});
-Select1.args = {}
+    const [selectedOpt, setSelectedOpt] = useState('Max')
 
-export const Select2 = () => {
-    const [value, setValue] = useState('')
-    const items = itemsCreator(['Julia', 'Max', 'Kate'])
+    return <Select value={selectedOpt}
+                   onChange={setSelectedOpt}
+                   options={itemsCreator(['Julia', 'Max', 'Kate'])}/>
+}
 
-    const onChangeHandler = () => setValue(value)
+export const WithoutValueExample = () => {
 
-    return <Select value={value}
-                   onChange={onChangeHandler}
-                   items={items}/>
+    const [selectedOpt, setSelectedOpt] = useState(null)
+
+    return <Select value={selectedOpt}
+                   onChange={setSelectedOpt}
+                   options={itemsCreator(['Julia', 'Max', 'Kate'])}/>
 }

@@ -1,7 +1,7 @@
-import React, {useMemo, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 
 export default {
-    title: 'Use Memo'
+    title: 'Use Memo And Use Callback'
 }
 
 export const UseMemoWithDifficultCount = () => {
@@ -78,20 +78,30 @@ export const UseMemoLikeUseCallback = () => {
     const [counter, setCounter] = useState<number>(10)
     const [books, setBooks] = useState<string[]>(['React', 'JS', 'CSS', 'HTML'])
 
-    const addBook = () => {
+    /*const addBook = () => {
         console.log(books)
         const newBooks = [...books, 'Angular' + new Date().getTime()]
         setBooks(newBooks)
-    }
+    }*/
 
     const memorizedAddBook = useMemo(() => {
-        return addBook
+        return () => {
+            console.log(books)
+            const newBooks = [...books, 'Angular' + new Date().getTime()]
+            setBooks(newBooks)
+        }
+    }, [books])
+
+    const memorizedAddBook2 = useCallback(() => {
+        console.log(books)
+        const newBooks = [...books, 'Angular' + new Date().getTime()]
+        setBooks(newBooks)
     }, [books])
 
     return <div>
         <button onClick={() => setCounter(counter + 1)}>+</button>
         {counter}
-        <Books addBook={memorizedAddBook}/>
+        <Books addBook={memorizedAddBook2}/>
     </div>
 }
 

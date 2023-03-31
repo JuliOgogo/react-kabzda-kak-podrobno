@@ -23,19 +23,23 @@ export const Clock: React.FC<ClockPropsType> = ({analogOrDigital}) => {
     const minutes00String = get00DataString(date.getMinutes())
     const seconds00String = get00DataString(date.getSeconds())
 
-    return <div>
+    let view
 
-        {analogOrDigital === 'analog' ? <div>
-            analog -
-            <span> {hours00String}</span>:
-            <span>{minutes00String}</span>:
-            <span>{seconds00String}</span>
-        </div> : <div>
-            digital -
-            <span> {hours00String}</span>:
-            <span>{minutes00String}</span>:
-            <span>{seconds00String}</span>
-        </div>}
+    switch (analogOrDigital) {
+        case "analog": {
+            return view = <span>Analog</span>
+            break
+        }
+        case "digital":
+        default: {
+            return view = <div>
+                Digital -
+                <span> {hours00String}</span>:
+                <span>{minutes00String}</span>:
+                <span>{seconds00String}</span>
+            </div>
+        }
+    }
 
-    </div>
+    return <div>{view}</div>
 }
